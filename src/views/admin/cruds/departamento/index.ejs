@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('../../../partials/head') %>
+    </head>
+    <body>
+        <%- include('../../../partials/nav_admin') %>
+
+        <main class="container p-4">
+            <h2 class="mb-4"><%= title %></h2>
+
+            <div class="mb-4">
+                <p>Agregar una departamento</p>
+                <a href="/admin/departamento/create" class="btn btn-secondary"
+                    >Agregar</a
+                >
+            </div>
+
+            <% if (error) { %>
+            <div
+                class="alert alert-danger alert-dismissible fade show mb-4"
+                role="alert"
+            >
+                <strong>Error!</strong> <%= error.message %>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <% } %>
+
+            <table class="table">
+                <thead>
+                    <tr class="table-secondary text-center">
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Activo</th>
+                        <th scope="col">Academia</th>
+                        <th scope="col">Fecha de creacion</th>
+                        <th scope="col" colspan="2">Aciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% departamentos.forEach(departamento => { %>
+                    <tr class="text-center">
+                        <td><%= departamento.departamento_id %></td>
+                        <td><%= departamento.departamento_nombre %></td>
+                        <td><%= departamento.departamento_descripcion %></td>
+                        <td><%= departamento.departamento_activo %></td>
+                        <td><%= departamento.academia_nombre %></td>
+                        <td>
+                            <%= departamento.departamento_fecha_de_creacion %>
+                        </td>
+                        <td>
+                            <a
+                                class="btn btn-success"
+                                href="/admin/departamento/update/<%= departamento.departamento_id %>"
+                                >Actualizar</a
+                            >
+                        </td>
+                        <td>
+                            <a
+                                class="btn btn-danger"
+                                href="/admin/departamento/delete/<%= departamento.departamento_id %>"
+                                >Eliminar</a
+                            >
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </main>
+
+        <%- include('../../../partials/footer') %>
+    </body>
+</html>
